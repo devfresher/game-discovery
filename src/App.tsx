@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar"
 
 function App() {
 	return (
-		<Grid templateAreas={{ lg: `"nav nav" "aside main"`, base: `"nav" "main"` }}>
+		<Grid paddingX={'10px'} templateAreas={{ lg: `"nav nav" "aside main"`, base: `"nav" "main"` }}>
 			<GridItem area="nav">
 				<NavBar />
 			</GridItem>

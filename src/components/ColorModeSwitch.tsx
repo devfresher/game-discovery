@@ -1,13 +1,14 @@
-import { HStack, Switch, Text, useColorMode } from "@chakra-ui/react"
+import { Button, HStack, Icon, Switch, Text, useColorMode } from "@chakra-ui/react"
+import { MdLightMode } from "react-icons/md"
+import { MdDarkMode } from "react-icons/md"
 
 const ColorModeSwitch = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
+	const { colorMode, toggleColorMode } = useColorMode()
 
 	return (
-		<HStack paddingX={4}>
-			<Switch colorScheme="green" isChecked={colorMode === "dark"} onChange={toggleColorMode} />
-			<Text>Dark mode</Text>
-		</HStack>
+		<Button onClick={toggleColorMode}>
+			<Icon as={colorMode === "dark" ? MdLightMode : MdDarkMode}></Icon>
+		</Button>
 	)
 }
 

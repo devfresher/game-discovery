@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
 import { Platform } from "../components/PlatformIconList"
-import apiClient from "../services/apiClient"
+import useData from "./useData"
 
 export interface Game {
 	id: number
@@ -10,28 +9,9 @@ export interface Game {
 	parent_platforms: { platform: Platform }[]
 	metacritic: number
 }
-interface FetchGameResponse {
-	count: number
-	results: Game[]
-}
 
 const useGame = () => {
-	const controller = new AbortController()
-	const [games, setGames] = useState<Game[]>([])
-	const [errors, setErrors] = useState([])
-    const [isLoading, setLoading] = useState(true)
-
-	useEffect(() => {
-		apiClient
-			.get<FetchGameResponse>("/games", { signal: controller.signal })
-			.then(({ data: { results } }) => {
-				setGames(results)
-				console.log(results)
-			})
-			.catch((err) => setErrors(err.message))
-            .finally(() => setLoading(false))
-	}, [])
-
-	return { games, errors, isLoading }
+	const { data, errors, isLoading } = useData<Game>("/games")
+	return { games: data, errors, isLoading }
 }
 export default useGame

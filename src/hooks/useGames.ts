@@ -19,6 +19,7 @@ const useGame = () => {
 	const controller = new AbortController()
 	const [games, setGames] = useState<Game[]>([])
 	const [errors, setErrors] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
 	useEffect(() => {
 		apiClient
@@ -28,8 +29,9 @@ const useGame = () => {
 				console.log(results)
 			})
 			.catch((err) => setErrors(err.message))
+            .finally(() => setLoading(false))
 	}, [])
 
-	return { games, errors }
+	return { games, errors, isLoading }
 }
 export default useGame

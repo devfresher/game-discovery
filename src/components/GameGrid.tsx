@@ -1,18 +1,21 @@
-import { SimpleGrid, Text } from "@chakra-ui/react"
+import { SimpleGrid, Text, useToast } from "@chakra-ui/react"
 import useGame from "../hooks/useGames"
+import { Genre } from "../hooks/useGenre"
 import GameCard from "./GameCard"
 import GameCardContainer from "./GameCardContainer"
 import GameCardSkeleton from "./GameCardSkeleton"
 
 const gameDummyData = [1, 2, 3, 4, 5, 6]
-
-const GameGrid = () => {
-	const { games, isLoading } = useGame()
+interface Props {
+	selectedGenre: Genre | null
+}
+const GameGrid = ({ selectedGenre }: Props) => {
+	const { games, isLoading } = useGame(selectedGenre)
+	console.log(isLoading)
 
 	return (
-		<SimpleGrid columns={[1, 2, 3]} spacing={[3, 10]}>
+		<SimpleGrid columns={[1, 2, 3]} spacing={3}>
 			{isLoading &&
-				games.length === 0 &&
 				gameDummyData.map((dummy) => (
 					<GameCardContainer key={dummy}>
 						<GameCardSkeleton />

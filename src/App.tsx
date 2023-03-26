@@ -6,18 +6,21 @@ import NavBar from "./components/NavBar"
 function App() {
 	return (
 		<Grid
-			paddingX={"10px"}
 			templateAreas={{ lg: `"nav nav" "aside main"`, base: `"nav" "main"` }}
+			templateColumns={{
+				base: "1fr",
+				lg: "20% 1fr",
+			}}
 		>
-			<GridItem area="nav">
+			<GridItem area="nav" mb={3}>
 				<NavBar />
 			</GridItem>
 			<Show above="lg">
-				<GridItem area="aside">
+				<GridItem area="aside" paddingX="10px">
 					<GenreList />
 				</GridItem>
 			</Show>
-			<GridItem area="main">
+			<GridItem area="main" paddingX='10px'>
 				<GameGrid />
 			</GridItem>
 		</Grid>

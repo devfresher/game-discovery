@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Platform } from "../components/PlatformIconList"
 import apiClient from "../services/apiClient"
 
 export interface Game {
@@ -6,6 +7,7 @@ export interface Game {
 	name: string
 	slug: string
 	background_image: string
+	parent_platforms: { platform: Platform }[]
 }
 interface FetchGameResponse {
 	count: number
@@ -20,7 +22,10 @@ const useGame = () => {
 	useEffect(() => {
 		apiClient
 			.get<FetchGameResponse>("/games", { signal: controller.signal })
-			.then(({ data: { results } }) => setGames(results))
+			.then(({ data: { results } }) => {
+				setGames(results)
+				console.log(results)
+			})
 			.catch((err) => setErrors(err.message))
 	}, [])
 

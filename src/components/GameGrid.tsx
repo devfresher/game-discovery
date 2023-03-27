@@ -11,7 +11,6 @@ interface Props {
 }
 const GameGrid = ({ selectedGenre }: Props) => {
 	const { games, isLoading } = useGame(selectedGenre)
-	console.log(isLoading)
 
 	return (
 		<SimpleGrid columns={[1, 2, 3]} spacing={3}>
